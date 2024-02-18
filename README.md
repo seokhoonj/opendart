@@ -1,5 +1,7 @@
 # opendart
 
+(in-development)
+
 -   Download corporate information via DART system (Data Analysis, Retrieval and Transfer System) which is the repository of Korea's corporate filings
 
 -   DART에 공시되고있는 공시보고서 원문, 정보 등을 OPEN API를 통해 활용할 수 있습니다.
@@ -16,6 +18,14 @@
 # install dev version
 devtools::install_github("seokhoonj/opendart")
 ```
+
+## Pre-requisite
+
+-   <https://opendart.fss.or.kr/uss/umt/EgovMberInsertView.do>에서 api key를 생성합니다.
+
+-   다음 코드 `usethis::edit_r_environ()` 를 실행하여 .Renviron 파일을 열고, OPENDART_API_KEY="발급받은 키 값" 를 입력한 후 저장합니다.
+
+-   다음 코드 `.rs.restartR()`를 실행하면 api key가 저장되고 함수를 활용하실 수 있습니다.
 
 ## Examples
 
