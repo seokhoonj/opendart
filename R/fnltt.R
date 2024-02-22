@@ -153,7 +153,7 @@ fnltt_xbrl <- function(path, rcept_no, period = c("A", "H", "Q1", "Q3")) {
   if (missing(path))
     path <- tempdir()
   tmp_file <- tempfile()
-  res <- request(url) |> req_url_query(!!!params) |>
+  resp <- request(url) |> req_url_query(!!!params) |>
     req_options(ssl_verifypeer = 0) |> req_perform(path = tmp_file)
   unzip_files <- unzip(zipfile = tmp_file, exdir = path)
   xbrl_files <- unzip_files[grepl("*.xbrl$", unzip_files)]

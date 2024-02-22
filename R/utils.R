@@ -23,9 +23,9 @@ index_to_idx_cl_code <- function(index = c("P", "S", "G", "A")) {
   return(idx_cl_code)
 }
 
-raise_error <- function(resp) {
-  if (resp$status != "000") {
-    stop(resp$status, " ", resp$message)
+raise_error <- function(res) {
+  if (res$status != "000") {
+    stop(res$status, " ", res$message)
   }
 }
 
@@ -65,19 +65,19 @@ url_fetch <- function(api_url, ...) {
   params <- list(crtfc_key = get_api_key())
   append_params <- list(...)
   params <- Filter(Negate(is.null), append(params, append_params))
-  res <- request(url) |> req_url_query(!!!params) |>
+  resp <- request(url) |> req_url_query(!!!params) |>
     req_options(ssl_verifypeer = 0) |> req_perform()
-  resp <- res |> resp_body_json()
-  if (resp$status == "000") {
-    if (!is.null(resp$list)) {
-      df <- data.table::rbindlist(resp$list, fill = TRUE)
+  res <- resp |> resp_body_json()
+  if (res$status == "000") {
+    if (!is.null(res$list)) {
+      df <- data.table::rbindlist(res$list, fill = TRUE)
       data.table::setDF(df)
       return(df)
     } else {
-      resp$status <- NULL
-      resp$message <- NULL
-      return(data.frame(resp))
+      res$status <- NULL
+      res$message <- NULL
+      return(data.frame(res))
     }
   }
-  raise_error(resp)
+  raise_error(res)
 }

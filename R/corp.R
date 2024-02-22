@@ -12,7 +12,7 @@ get_corp_code <- function(path) {
   if (missing(path))
     path <- tempdir();
   tmp_file <- tempfile()
-  res <- request(url) |> req_url_query(!!!params) |>
+  resp <- request(url) |> req_url_query(!!!params) |>
     req_options(ssl_verifypeer = 0) |> req_perform(path = tmp_file)
   unzip_path <- unzip(zipfile = tmp_file, exdir = path)
   df <- read_xml(unzip_path)
